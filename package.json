@@ -1,0 +1,25 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "doreen's portfolio",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trinhdm/portfolio2020.git"
+  },
+  "keywords": [
+    "portfolio"
+  ],
+  "author": "doreen trinh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trinhdm/portfolio2020/issues"
+  },
+  "homepage": "https://github.com/trinhdm/portfolio2020#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
+}
