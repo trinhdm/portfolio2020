@@ -26,6 +26,7 @@ function css() {
 			outputStyle: 'compact'
 		}))
 		.pipe(postcss([ autoprefixer() ]))
+		.pipe(bsync.stream())
 		.pipe(gulp.dest('dist/css'));
 }
 
@@ -40,7 +41,7 @@ function scripts() {
 }
 
 function fonts() {
-	return gulp.src('fonts/**/*')
+	return gulp.src('src/fonts/*')
 		.pipe(gulp.dest('dist/fonts'))
 }
 
@@ -54,21 +55,20 @@ function bsync(done) {
 	done();
 }
 
-function browserSyncReload(done) {
-	bsync.reload();
-	done();
+function reload() {
+	browserSync.reload();
 }
 
 function watch() {
-	gulp.watch('src/pug/**/*.pug', html);
-	gulp.watch('src/sass/**/*.scss', css);
-	gulp.watch('src/js/**/*.js', scripts); 
-	gulp.watch('fonts/**/*', fonts);
+	gulp.watch('src/pug/**/*.pug', html).on('change', reload);
+	gulp.watch('src/sass/**/*.scss', css).on('change', reload);
+	gulp.watch('src/js/**/*.js', scripts).on('change', reload); 
+	gulp.watch('src/fonts/*', fonts);
 
-	gulp.watch('dist/**/*', browserSyncReload);
+	gulp.watch('dist/*.html', reload);
 }
 
-var build = gulp.series(html, css, scripts),
+var build = gulp.series(html, css, scripts, fonts),
 	watch = gulp.series(gulp.parallel(watch, bsync));
 
 exports.build = build;
